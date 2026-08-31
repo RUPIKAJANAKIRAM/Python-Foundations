@@ -40,3 +40,22 @@ def max_subarray_sum(nums: list[int]) -> int:
         current = max(num, current + num)
         best = max(best, current)
     return best
+
+
+def contains_duplicate(nums: list[int]) -> bool:
+    """Return True if any value appears at least twice.
+
+    https://leetcode.com/problems/contains-duplicate/
+
+    Approach: track seen values in a set; a value already present means a
+    duplicate. Returns early on the first collision.
+
+    Time: O(n) — one pass, O(1) set membership.
+    Space: O(n) — worst case all values distinct and stored.
+    """
+    seen: set[int] = set()
+    for num in nums:
+        if num in seen:
+            return True
+        seen.add(num)
+    return False

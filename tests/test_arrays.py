@@ -6,7 +6,7 @@ for everything you add. If a function has no edge-case test, it isn't done.
 
 import pytest
 
-from dsa.arrays import max_subarray_sum, two_sum
+from dsa.arrays import contains_duplicate, max_subarray_sum, two_sum
 
 
 class TestTwoSum:
@@ -45,3 +45,23 @@ class TestMaxSubarraySum:
     def test_empty_raises(self) -> None:
         with pytest.raises(ValueError, match="must not be empty"):
             max_subarray_sum([])
+
+
+class TestContainsDuplicate:
+    @pytest.mark.parametrize(
+        ("nums", "expected"),
+        [
+            ([1, 2, 3, 1], True),
+            ([1, 2, 3, 4], False),
+            ([1, 1, 1, 3, 3, 4], True),
+            ([-1, 0, -1], True),
+        ],
+    )
+    def test_detects_duplicates(self, nums: list[int], expected: bool) -> None:
+        assert contains_duplicate(nums) == expected
+
+    def test_empty_list(self) -> None:
+        assert contains_duplicate([]) is False
+
+    def test_single_element(self) -> None:
+        assert contains_duplicate([42]) is False
