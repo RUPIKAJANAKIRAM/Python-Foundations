@@ -6,7 +6,7 @@ for everything you add. If a function has no edge-case test, it isn't done.
 
 import pytest
 
-from dsa.arrays import contains_duplicate, max_subarray_sum, two_sum
+from dsa.arrays import contains_duplicate, is_anagram, max_subarray_sum, two_sum
 
 
 class TestTwoSum:
@@ -65,3 +65,15 @@ class TestContainsDuplicate:
 
     def test_single_element(self) -> None:
         assert contains_duplicate([42]) is False
+
+
+class TestValidAnagram:
+    @pytest.mark.parametrize(
+        ("s", "t", "expected"),
+        [
+            ("anagram", "nagaram", True),
+            ("rat", "car", False),
+        ],
+    )
+    def test_valid_anagram(self, s: str, t: str, expected: bool) -> None:
+        assert is_anagram(s, t) == expected
