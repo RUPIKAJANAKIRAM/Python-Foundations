@@ -77,3 +77,14 @@ def is_anagram(s: str, t: str) -> bool:
             del counts[char]
 
     return not counts
+
+
+def group_anagrams(strs: list[str]) -> list[list[str]]:
+    groups: dict[tuple[str, ...], list[str]] = {}
+    for s in strs:
+        key = tuple(sorted(s))
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(s)
+
+    return list(groups.values())
