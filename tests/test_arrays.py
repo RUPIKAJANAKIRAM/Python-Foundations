@@ -6,7 +6,7 @@ for everything you add. If a function has no edge-case test, it isn't done.
 
 import pytest
 
-from dsa.arrays import contains_duplicate, is_anagram, max_subarray_sum, two_sum
+from dsa.arrays import contains_duplicate, group_anagrams, is_anagram, max_subarray_sum, two_sum
 
 
 class TestTwoSum:
@@ -77,3 +77,19 @@ class TestValidAnagram:
     )
     def test_valid_anagram(self, s: str, t: str, expected: bool) -> None:
         assert is_anagram(s, t) == expected
+
+
+class TestGroupAnagrams:
+    @pytest.mark.parametrize(
+        ("strs", "expected"),
+        [
+            (
+                ["eat", "tea", "tan", "ate", "nat", "bat"],
+                [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
+            ),
+            ([""], [[""]]),
+            (["a"], [["a"]]),
+        ],
+    )
+    def test_group_anagrams(self, strs: list[str], expected: list[list[str]]) -> None:
+        assert group_anagrams(strs) == expected
