@@ -5,6 +5,8 @@ a docstring stating the approach, time and space complexity, and full type hints
 Writing the complexity down forces you to actually know it.
 """
 
+from collections import Counter
+
 
 def two_sum(nums: list[int], target: int) -> tuple[int, int] | None:
     """Return indices of the two numbers adding to target, or None.
@@ -88,3 +90,7 @@ def group_anagrams(strs: list[str]) -> list[list[str]]:
         groups[key].append(s)
 
     return list(groups.values())
+
+
+def top_k_frequent(nums: list[int], k: int) -> list[int]:
+    return [n for n, _ in Counter(nums).most_common()][:k]
