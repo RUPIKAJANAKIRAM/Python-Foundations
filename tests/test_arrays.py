@@ -6,7 +6,14 @@ for everything you add. If a function has no edge-case test, it isn't done.
 
 import pytest
 
-from dsa.arrays import contains_duplicate, group_anagrams, is_anagram, max_subarray_sum, two_sum
+from dsa.arrays import (
+    contains_duplicate,
+    group_anagrams,
+    is_anagram,
+    max_subarray_sum,
+    top_k_frequent,
+    two_sum,
+)
 
 
 class TestTwoSum:
@@ -93,3 +100,28 @@ class TestGroupAnagrams:
     )
     def test_group_anagrams(self, strs: list[str], expected: list[list[str]]) -> None:
         assert group_anagrams(strs) == expected
+
+
+class TestTopKFrequent:
+    @pytest.mark.parametrize(
+        ("nums", "k", "expected"),
+        [
+            ([1, 1, 1, 2, 2, 3], 2, [1, 2]),
+            ([1], 1, [1]),
+            ([-1, -1, -2, -3, -3, -3, -4, -4, -4, -4], 3, [-4, -3, -1]),
+        ],
+    )
+    def test_top_k_frequent(self, nums: list[int], k: int, expected: list[int]) -> None:
+        assert top_k_frequent(nums, k) == expected
+
+    def test_empty_input(self) -> None:
+        assert top_k_frequent([], 3) == []
+
+    def test_k_larger_than_unique_elements(self) -> None:
+        assert top_k_frequent([1, 2], 3) == [1, 2]
+
+    def test_single_element(self) -> None:
+        assert top_k_frequent([42], 1) == [42]
+
+    def test_all_same_elements(self) -> None:
+        assert top_k_frequent([1, 1, 1, 1], 2) == [1]
