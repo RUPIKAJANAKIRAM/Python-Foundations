@@ -11,6 +11,7 @@ from dsa.arrays import (
     group_anagrams,
     is_anagram,
     max_subarray_sum,
+    product_except_self,
     top_k_frequent,
     two_sum,
 )
@@ -125,3 +126,19 @@ class TestTopKFrequent:
 
     def test_all_same_elements(self) -> None:
         assert top_k_frequent([1, 1, 1, 1], 2) == [1]
+
+
+class TestProductExceptSelf:
+    @pytest.mark.parametrize(
+        ("nums", "expected"),
+        [
+            ([1, 2, 3, 4], [24, 12, 8, 6]),
+            ([1], [1]),
+            ([-1, -1, 0, 1, 1], [0, 0, 1, 0, 0]),
+            ([-1, 1, 0, -3, 3], [0, 0, 9, 0, 0]),
+            ([1, 2, 0, 4], [0, 0, 8, 0]),
+            ([0, 1], [1, 0]),
+        ],
+    )
+    def test_product_except_self(self, nums: list[int], expected: list[int]) -> None:
+        assert product_except_self(nums) == expected
