@@ -94,3 +94,21 @@ def group_anagrams(strs: list[str]) -> list[list[str]]:
 
 def top_k_frequent(nums: list[int], k: int) -> list[int]:
     return [n for n, _ in Counter(nums).most_common()][:k]
+
+
+def product_except_self(nums: list[int]) -> list[int]:
+    """Return an array where each index holds the product of all other numbers."""
+    n = len(nums)
+    result = [1] * n
+
+    prefix = 1
+    for i in range(n):
+        result[i] = prefix
+        prefix *= nums[i]
+
+    suffix = 1
+    for i in range(n - 1, -1, -1):
+        result[i] *= suffix
+        suffix *= nums[i]
+
+    return result
